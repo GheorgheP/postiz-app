@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, useCallback, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams } from '@gitroom/react/helpers/navigation';
 import { useLocalStorage } from '@mantine/hooks';
 import { useFireEvents } from '@gitroom/helpers/utils/use.fire.events';
 

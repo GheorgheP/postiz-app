@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@gitroom/react/helpers/navigation';
 import { useMemo } from 'react';
 import { useMenuItem } from '@gitroom/frontend/components/layout/top.menu';
 export const Title = () => {

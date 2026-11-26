@@ -11,10 +11,10 @@ const ModeComponent = dynamic(
 );
 
 import clsx from 'clsx';
-import dynamic from 'next/dynamic';
+import dynamic from '@gitroom/react/helpers/dynamic';
 import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
 import { useVariables } from '@gitroom/react/helpers/variable.context';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from '@gitroom/react/helpers/navigation';
 import useSWR from 'swr';
 import { CheckPayment } from '@gitroom/frontend/components/layout/check.payment';
 import { ToolTip } from '@gitroom/frontend/components/layout/top.tip';

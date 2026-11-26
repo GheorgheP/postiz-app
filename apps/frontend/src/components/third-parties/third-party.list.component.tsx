@@ -4,7 +4,7 @@ import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
 import useSWR from 'swr';
 import React, { FC, useCallback, useState } from 'react';
 import { Button } from '@gitroom/react/form/button';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@gitroom/react/helpers/navigation';
 import { useModals } from '@gitroom/frontend/components/layout/new-modal';
 import { FieldValues, FormProvider, useForm } from 'react-hook-form';
 import { useT } from '@gitroom/react/translation/get.transation.service.client';

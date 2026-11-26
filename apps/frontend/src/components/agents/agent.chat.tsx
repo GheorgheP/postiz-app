@@ -27,7 +27,7 @@ import {
   PropertiesContext,
 } from '@gitroom/frontend/components/agents/agent';
 import { useVariables } from '@gitroom/react/helpers/variable.context';
-import { useParams } from 'next/navigation';
+import { useParams } from '@gitroom/react/helpers/navigation';
 import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
 import {
   Message as CopilotMessage,

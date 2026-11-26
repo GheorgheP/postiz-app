@@ -1,6 +1,5 @@
 'use client';
 
-import Script from 'next/script';
 import { FC, useEffect } from 'react';
 import { useUser } from '@gitroom/frontend/components/layout/user.context';
 import { useVariables } from '@gitroom/react/helpers/variable.context';
@@ -37,21 +36,24 @@ export const TrialTracker: FC = () => {
 export const GoogleTagManagerComponent: FC<{ gtmId?: string }> = ({
   gtmId,
 }) => {
-  if (!gtmId) {
-    return null;
-  }
-  return (
-    <>
-      <Script src="/g.js" strategy="afterInteractive" />
+  useEffect(() => {
+    if (!gtmId) {
+      return;
+    }
+    const gtag = document.createElement('script');
+    gtag.src = '/g.js';
+    gtag.async = true;
+    document.head.appendChild(gtag);
 
-      <Script id="google-ads-gtag" strategy="afterInteractive">
-        {`
+    const config = document.createElement('script');
+    config.id = 'google-ads-gtag';
+    config.innerHTML = `
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', '${gtmId}');
-  `}
-      </Script>
-    </>
-  );
+  `;
+    document.head.appendChild(config);
+  }, [gtmId]);
+  return null;
 };

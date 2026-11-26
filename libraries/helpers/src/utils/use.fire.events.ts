@@ -1,10 +1,8 @@
-import { usePlausible } from 'next-plausible';
 import { useCallback } from 'react';
 import { useVariables } from '@gitroom/react/helpers/variable.context';
 
 export const useFireEvents = () => {
   const { billingEnabled } = useVariables();
-  const plausible = usePlausible();
 
   return useCallback(
     (name: string, props?: any) => {
@@ -12,8 +10,9 @@ export const useFireEvents = () => {
         return;
       }
 
-      plausible(name, { props });
+      // loaded by PlausibleProvider (apps/frontend/src/components/layout/plausible.component.tsx)
+      (window as any).plausible?.(name, { props });
     },
-    [billingEnabled, plausible]
+    [billingEnabled]
   );
 };

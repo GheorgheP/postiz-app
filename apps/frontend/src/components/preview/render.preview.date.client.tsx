@@ -1,6 +1,6 @@
 'use client';
 
-import dynamic from 'next/dynamic';
+import dynamic from '@gitroom/react/helpers/dynamic';
 
 const RenderPreviewDate = dynamic(
   () =>

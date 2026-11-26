@@ -1,4 +1,4 @@
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams } from '@gitroom/react/helpers/navigation';
 import { FC, useEffect } from 'react';
 import { useFireEvents } from '@gitroom/helpers/utils/use.fire.events';
 export const NewSubscription: FC = () => {

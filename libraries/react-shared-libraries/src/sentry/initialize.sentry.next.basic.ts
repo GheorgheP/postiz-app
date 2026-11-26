@@ -1,4 +1,4 @@
-import * as Sentry from '@sentry/nextjs';
+import * as Sentry from '@sentry/react';
 
 export const initializeSentryBasic = (environment: string, dsn: string, extension: any) => {
   if (!dsn) {
@@ -38,9 +38,11 @@ export const initializeSentryBasic = (environment: string, dsn: string, extensio
 
   // Sentry wraps timer and event listener callbacks, extensions' included, and the
   // wrapper lives in our bundle. Its location is recorded so it is not counted as ours.
+  // Our bundle is what Vite builds into /assets/.
+  const bundlePath = '/assets/';
   let sentryWrapperFrame = '';
   const frameKey = (frame: Sentry.StackFrame) =>
-    `${(frame.filename || '').split('/_next/').pop()}:${frame.lineno}:${frame.colno}`;
+    `${(frame.filename || '').split(bundlePath).pop()}:${frame.lineno}:${frame.colno}`;
 
   const isThirdPartyOnly = (event: Sentry.ErrorEvent) => {
     const values = event.exception?.values || [];
@@ -55,7 +57,7 @@ export const initializeSentryBasic = (environment: string, dsn: string, extensio
         if (!callbackFrames.length) {
           return thirdPartyFramelessPatterns.some((pattern) => pattern.test(value.value || ''));
         }
-        return callbackFrames.every((frame) => !frame.filename!.includes('/_next/'));
+        return callbackFrames.every((frame) => !frame.filename!.includes(bundlePath));
       })
     );
   };

@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, useCallback, useEffect, useRef } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from '@gitroom/react/helpers/navigation';
 import { useModals } from '@gitroom/frontend/components/layout/new-modal';
 import { useT } from '@gitroom/react/translation/get.transation.service.client';
 import { OnboardingModal } from '@gitroom/frontend/components/onboarding/onboarding.modal';

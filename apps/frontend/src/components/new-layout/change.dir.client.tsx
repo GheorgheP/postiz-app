@@ -1,6 +1,6 @@
 'use client';
 
-import dynamicLoad from 'next/dynamic';
+import dynamicLoad from '@gitroom/react/helpers/dynamic';
 
 const ChangeDirComponent = dynamicLoad(
   () =>

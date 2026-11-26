@@ -6,7 +6,7 @@ import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
 import { Button } from '@gitroom/react/form/button';
 import { Input } from '@gitroom/react/form/input';
 import { useState, useEffect, useCallback } from 'react';
-import Link from 'next/link';
+import { Link } from '@tanstack/react-router';
 
 type ResendInputs = {
   email: string;

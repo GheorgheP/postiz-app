@@ -1,8 +1,8 @@
 'use client';
 import { FC, ReactNode } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@gitroom/react/helpers/navigation';
 import clsx from 'clsx';
-import Link from 'next/link';
+import { Link } from '@tanstack/react-router';
 
 export const MenuItem: FC<{ label: string; icon: ReactNode; path: string; onClick?: () => void }> = ({
   label,
@@ -37,7 +37,6 @@ export const MenuItem: FC<{ label: string; icon: ReactNode; path: string; onClic
 
   return (
     <Link
-      prefetch={true}
       href={path}
       title={label}
       {...path.indexOf('http') === 0 && { target: '_blank' }}

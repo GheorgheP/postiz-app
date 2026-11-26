@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@gitroom/react/helpers/navigation';
 export const Redirect: FC<{
   url: string;
   delay: number;
