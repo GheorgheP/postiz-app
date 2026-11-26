@@ -12,7 +12,9 @@ rendering. In Docker, nginx serves the build (`var/docker/nginx.conf`).
   logout, invites), what the Next.js middleware used to do.
 - Navigation: the hooks of `@gitroom/react/helpers/navigation` (`useRouter`,
   `usePathname`, `useSearchParams`, `useParams`), and `Link` from
-  `@tanstack/react-router` with `href`.
+  `@tanstack/react-router` with `href` for paths of the app (it drops the
+  origin of an external URL, use a plain `<a>` for those). Search values are
+  always strings.
 - A component loaded on first render: `dynamic` from
   `@gitroom/react/helpers/dynamic`.
 - Page titles: the `head` option of the route.

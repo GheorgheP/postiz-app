@@ -7,7 +7,8 @@ export const backendFetch = (url: string, options?: RequestInit) =>
   customFetch({ baseUrl: runtimeVariables().backendUrl })(url, options);
 
 // The auth cookie is httpOnly, so ask the backend whether there is a session.
-// Once per page load: logging in and out both reload the page.
+// Once per page load: logging in reloads the page, logging out goes through
+// /auth/logout, which calls forgetSession.
 let session: Promise<boolean> | undefined;
 export const isLogged = () => {
   session ??= backendFetch('/user/self').then(
@@ -15,4 +16,8 @@ export const isLogged = () => {
     () => false
   );
   return session;
+};
+
+export const forgetSession = () => {
+  session = undefined;
 };

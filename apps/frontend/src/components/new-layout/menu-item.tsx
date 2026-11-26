@@ -35,13 +35,17 @@ export const MenuItem: FC<{ label: string; icon: ReactNode; path: string; onClic
     );
   }
 
+  // the router's Link only handles paths of the app, it would drop the origin
+  if (path.indexOf('http') === 0) {
+    return (
+      <a href={path} title={label} target="_blank" className={className}>
+        {inner}
+      </a>
+    );
+  }
+
   return (
-    <Link
-      href={path}
-      title={label}
-      {...path.indexOf('http') === 0 && { target: '_blank' }}
-      className={className}
-    >
+    <Link href={path} title={label} className={className}>
       {inner}
     </Link>
   );

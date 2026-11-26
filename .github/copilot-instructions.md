@@ -3,7 +3,7 @@
 
 ## Project Architecture
 - Monorepo managed by NX, with apps in `apps/` and shared code in `libraries/`.
-- Main services: `frontend` (Next.js), `backend` (NestJS), `cron`, `commands`, `extension`, `sdk`, and `workers`.
+- Main services: `frontend` (Vite + React, TanStack Router), `backend` (NestJS), `cron`, `commands`, `extension`, `sdk`, and `workers`.
 - Data layer uses Prisma ORM (`libraries/nestjs-libraries/src/database/prisma/schema.prisma`) with PostgreSQL as the default database.
 - Redis (BullMQ) is used for queues and caching.
 - Email notifications via Resend.
@@ -51,7 +51,7 @@
 
 # Logs
 
-- Where logs are used, ensure Sentry is imported using `import * as Sentry from "@sentry/nextjs"`
+- Where logs are used, ensure Sentry is imported using `import * as Sentry from "@sentry/react"` in the frontend (`@sentry/nestjs` in the backend)
 - Enable logging in Sentry using `Sentry.init({ enableLogs: true })`
 - Reference the logger using `const { logger } = Sentry`
 - Sentry offers a `consoleLoggingIntegration` that can be used to log specific console error types automatically without instrumenting the individual logger calls
@@ -63,7 +63,7 @@ The Sentry initialization needs to be updated to enable the logs feature.
 ### Baseline
 
 ```javascript
-import * as Sentry from "@sentry/nextjs";
+import * as Sentry from "@sentry/react";
 
 Sentry.init({
   dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
@@ -89,7 +89,7 @@ Sentry.init({
 `logger.fmt` is a template literal function that should be used to bring variables into the structured logs.
 
 ```javascript
-import * as Sentry from "@sentry/nextjs";
+import * as Sentry from "@sentry/react";
 
 const { logger } = Sentry;
 

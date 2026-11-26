@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
+import useSWR from 'swr';
 import { sanitizePostContent } from '@gitroom/helpers/utils/sanitize.post.content';
 import { runtimeVariables } from '@gitroom/react/helpers/variable.context';
-import { backendFetch } from '@gitroom/frontend/components/layout/session';
+import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
 import SafeImage from '@gitroom/react/helpers/safe.image';
 import { PlatformIcon } from '@gitroom/frontend/components/ui/platform.icon.component';
 import { CommentsComponents } from '@gitroom/frontend/components/preview/comments.components';
@@ -24,18 +25,25 @@ export const Route = createFileRoute('/_app/(preview)/p/$id/')({
       },
     ],
   }),
-  loader: async ({ params }) => ({
-    post: await (await backendFetch(`/public/posts/${params.id}`)).json(),
-  }),
   component: Preview,
 });
+
+const usePublicPost = (id: string) => {
+  const fetch = useFetch();
+  return useSWR(`public-post-${id}`, async () => {
+    return (await fetch(`/public/posts/${id}`)).json();
+  });
+};
 
 function Preview() {
   const searchParams = Route.useSearch() as { share?: string };
   const { id } = Route.useParams();
-  const { post } = Route.useLoaderData();
+  const { data: post, isLoading } = usePublicPost(id);
   const t = useT();
-  if (!post.length) {
+  if (isLoading) {
+    return null;
+  }
+  if (!post?.length) {
     return (
       <div className="text-newTextColor fixed start-0 top-0 w-full h-full flex justify-center items-center text-[20px]">
         {t('post_not_found', 'Post not found')}

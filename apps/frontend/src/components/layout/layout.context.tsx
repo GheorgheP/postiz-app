@@ -13,14 +13,19 @@ export default function LayoutContext(params: { children: ReactNode }) {
   }
   return <></>;
 }
-export function setCookie(cname: string, cvalue: string, exdays: number) {
+export function setCookie(
+  cname: string,
+  cvalue: string,
+  exdays: number,
+  attributes = ''
+) {
   if (typeof document === 'undefined') {
     return;
   }
   const d = new Date();
   d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
   const expires = 'expires=' + d.toUTCString();
-  document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/';
+  document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/' + attributes;
 }
 function LayoutContextInner(params: { children: ReactNode }) {
   const returnUrl = useReturnUrl();

@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
+import useSWR from 'swr';
 import { Register } from '@gitroom/frontend/components/auth/register';
 import { LoginWithOidc } from '@gitroom/frontend/components/auth/login.with.oidc';
-import { customFetch } from '@gitroom/helpers/utils/custom.fetch.func';
+import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
 import { runtimeVariables } from '@gitroom/react/helpers/variable.context';
 import { useT } from '@gitroom/react/translation/get.transation.service.client';
 
@@ -13,26 +14,26 @@ export const Route = createFileRoute('/_app/auth/')({
       },
     ],
   }),
-  loaderDeps: ({ search }) => ({
-    provider: (search as { provider?: string }).provider,
-  }),
-  loader: async ({ deps }) => {
-    const { disableRegistration, backendUrl } = runtimeVariables();
-    if (!disableRegistration || deps.provider) {
-      return { canRegister: true };
-    }
-    const { register } = await (
-      await customFetch({ baseUrl: backendUrl })('/auth/can-register')
-    ).json();
-    return { canRegister: !!register };
-  },
   component: Auth,
 });
 
+// with DISABLE_REGISTRATION the backend can still allow it (e.g. first user)
+const useCanRegister = (check: boolean) => {
+  const fetch = useFetch();
+  return useSWR(check ? 'can-register' : null, async () => {
+    return !!(await (await fetch('/auth/can-register')).json()).register;
+  });
+};
+
 function Auth() {
   const t = useT();
-  const { canRegister } = Route.useLoaderData();
-  if (!canRegister) {
+  const { provider } = Route.useSearch() as { provider?: string };
+  const check = runtimeVariables().disableRegistration && !provider;
+  const { data: canRegister, isLoading } = useCanRegister(check);
+  if (check && isLoading) {
+    return null;
+  }
+  if (check && !canRegister) {
     return (
       <>
         <LoginWithOidc />

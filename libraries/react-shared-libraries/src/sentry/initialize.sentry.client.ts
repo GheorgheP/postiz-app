@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/react';
-import { initializeSentryBasic } from '@gitroom/react/sentry/initialize.sentry.next.basic';
+import { initializeSentryBasic } from '@gitroom/react/sentry/initialize.sentry.basic';
 
 export const setSentryUser = (
   user?: { id: string; email?: string; orgId: string } | null

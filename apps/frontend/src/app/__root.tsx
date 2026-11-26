@@ -15,15 +15,9 @@ import { setCookie } from '@gitroom/frontend/components/layout/layout.context';
 import { GlobalError } from '@gitroom/frontend/components/layout/global.error.component';
 import {
   backendFetch,
+  forgetSession,
   isLogged,
 } from '@gitroom/frontend/components/layout/session';
-
-const cookieOptions = () =>
-  runtimeVariables().isSecured
-    ? `;secure;samesite=none;domain=${getCookieUrlFromDomain(
-        runtimeVariables().frontEndUrl
-      )}`
-    : '';
 
 // What the Next.js middleware (proxy.ts) did on every page request
 const guard = async (location: ParsedLocation) => {
@@ -64,6 +58,7 @@ const guard = async (location: ParsedLocation) => {
 
   if (href.indexOf('/auth/logout') > -1) {
     await backendFetch('/user/logout', { method: 'POST' }).catch(() => null);
+    forgetSession();
     if (!isSecured) {
       setCookie('auth', '', -10);
       setCookie('showorg', '', -10);
@@ -101,9 +96,16 @@ const guard = async (location: ParsedLocation) => {
   if (pathname.startsWith('/auth') && !logged) {
     if (org) {
       // read by the backend when the invited person registers or logs in
-      document.cookie = `org=${org};path=/;expires=${new Date(
-        Date.now() + 2 * 24 * 60 * 60 * 1000
-      ).toUTCString()}${cookieOptions()}`;
+      setCookie(
+        'org',
+        org,
+        2,
+        isSecured
+          ? `;secure;domain=${getCookieUrlFromDomain(
+              runtimeVariables().frontEndUrl
+            )}`
+          : ''
+      );
       throw redirect({ href: '/' });
     }
     return;
