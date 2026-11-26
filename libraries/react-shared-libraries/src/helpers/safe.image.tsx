@@ -1,9 +1,8 @@
 'use client';
 
-import { FC } from 'react';
-import { ImageProps } from 'next/image';
+import { FC, ImgHTMLAttributes } from 'react';
 
-type SafeImageProps = Omit<ImageProps, 'src'> & {
+type SafeImageProps = Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'> & {
   src: string;
 };
 

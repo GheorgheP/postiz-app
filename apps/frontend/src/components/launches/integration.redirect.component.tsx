@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from '@gitroom/react/helpers/navigation';
 import { FC, useEffect } from 'react';
 import { newDayjs } from '@gitroom/frontend/components/layout/set.timezone';
 export const IntegrationRedirectComponent: FC = () => {

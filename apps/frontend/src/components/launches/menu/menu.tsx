@@ -24,7 +24,7 @@ import { CustomerModal } from '@gitroom/frontend/components/launches/customer.mo
 import { Integration } from '@prisma/client';
 import { SettingsModal } from '@gitroom/frontend/components/launches/settings.modal';
 import { CustomVariables } from '@gitroom/frontend/components/launches/add.provider.component';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@gitroom/react/helpers/navigation';
 import { useVariables } from '@gitroom/react/helpers/variable.context';
 import { useT } from '@gitroom/react/translation/get.transation.service.client';
 import { AddEditModal } from '@gitroom/frontend/components/new-launch/add.edit.modal';

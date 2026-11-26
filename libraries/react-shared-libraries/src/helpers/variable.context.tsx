@@ -93,3 +93,17 @@ export const loadVars = () => {
   // @ts-ignore
   return window.vars as VariableContextInterface;
 };
+
+// The settings written to /config.js when the server starts, see
+// apps/frontend/runtime.config.mjs
+export type RuntimeVariables = Omit<
+  VariableContextInterface,
+  'environment' | 'language'
+> & {
+  disableRegistration: boolean;
+  datafastWebsiteId?: string;
+};
+export const runtimeVariables = () => {
+  // @ts-ignore
+  return window.__POSTIZ_CONFIG__ as RuntimeVariables;
+};

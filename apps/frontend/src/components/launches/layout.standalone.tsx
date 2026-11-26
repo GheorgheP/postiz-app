@@ -2,7 +2,7 @@
 
 import { ReactNode, useMemo } from 'react';
 import { PreviewWrapper } from '@gitroom/frontend/components/preview/preview.wrapper';
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@gitroom/react/helpers/navigation';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 dayjs.extend(utc);

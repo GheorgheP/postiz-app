@@ -11,8 +11,8 @@ import {
 import { UtcToLocalDateRender } from '@gitroom/react/helpers/utc.date.render';
 import { Button } from '@gitroom/react/form/button';
 import { fromUtc } from '@gitroom/frontend/components/layout/set.timezone';
-import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { Link } from '@tanstack/react-router';
+import { useRouter, useSearchParams } from '@gitroom/react/helpers/navigation';
 import useSWR from 'swr';
 import clsx from 'clsx';
 import { useFetch } from '@gitroom/helpers/utils/custom.fetch';

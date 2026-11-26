@@ -16,7 +16,7 @@ import { useBillingFeatures } from '@gitroom/frontend/components/billing/first.b
 import { BillingHistory } from '@gitroom/frontend/components/billing/billing.history.component';
 import useSWR, { useSWRConfig } from 'swr';
 import { useUser } from '@gitroom/frontend/components/layout/user.context';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from '@gitroom/react/helpers/navigation';
 import { useVariables } from '@gitroom/react/helpers/variable.context';
 import { useModals } from '@gitroom/frontend/components/layout/new-modal';
 import { useFireEvents } from '@gitroom/helpers/utils/use.fire.events';

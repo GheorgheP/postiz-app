@@ -1,12 +1,5 @@
-import localFont from 'next/font/local';
+import './plus.jakarta.sans.font.scss';
 
-export const jakartaSans = localFont({
-  src: [
-    { path: './PlusJakartaSans.woff2', weight: '500 700', style: 'normal' },
-    {
-      path: './PlusJakartaSans-Italic.woff2',
-      weight: '500 700',
-      style: 'italic',
-    },
-  ],
-});
+// What next/font/local generated, as a plain stylesheet. index.html also puts
+// the class on <body>.
+export const jakartaSans = { className: 'font-plus-jakarta-sans' };
